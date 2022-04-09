@@ -51,8 +51,9 @@ btns.forEach(btn => {
 
     btn.addEventListener('click', (e)=> {
       const store = e.target.textContent
-      return display.textContent += store
-        
+      display.textContent += store
+      const storeTwo = display.textContent
+      console.log(storeTwo)
     });
 
  });
@@ -62,4 +63,5 @@ btnClear.addEventListener('click', (e) => {
    const store = e.target.textContent
    display.textContent = ""
 })
+
 
