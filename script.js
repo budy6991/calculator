@@ -72,6 +72,7 @@ btns.forEach(btn => {
     }
 
     else if (Number(e.target.textContent) <= 9) {
+        
         store = Number(e.target.textContent)
         display.textContent += store
         storeThree = Number(display.textContent)
@@ -81,6 +82,8 @@ btns.forEach(btn => {
     
     else if (e.target.textContent == '='){
       display.textContent = (operator(`${operation}`, storeTwo, storeThree))
+        storeTwo = (operator(`${operation}`, storeTwo, storeThree))
+        
     }
     
     else if (e.target.textContent == 'AC'){
