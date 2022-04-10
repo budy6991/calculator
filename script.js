@@ -29,7 +29,7 @@ function operator(operator, num1, num2) {
         return substract(num1,num2)
     }
 
-    else if (operator =="*"){
+    else if (operator =="x"){
         return multiply(num1,num2)
     }
 
@@ -41,44 +41,64 @@ function operator(operator, num1, num2) {
 
 // Creating the event listeners 
 
-const btns = document.querySelectorAll('button:not(.clear, .equal');
+const btns = document.querySelectorAll('button');
 const display = document.querySelector('.display')
 const btnClear = document.querySelector('.clear')
 const btnEqual = document.querySelector('.equal')
 
+let store = 0;
+let storeTwo = 0;
+let storeThree =0;
+let operation = '';
 
 btns.forEach(btn => {
     
+    
+
     btn.addEventListener('click', (e)=> {
         
-        let store = 0;
-        let storeTwo = 0;
+        
 
-    if (Number(e.target.textContent) <= 9) {
+    if (Number(e.target.textContent) <= 9 && operation == '') {
     store = Number(e.target.textContent)
-      display.textContent += store
-    storeTwo = display.textContent
-    console.log(storeTwo)
+    display.textContent += store
+    storeTwo = Number(display.textContent)
     }
     
-    else if (e.target.textContent == '+'){
-        let storeTwo = Number(display.textContent)
-        console.log(operator('+', storeTwo, storeTwo))
+    else if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '/' ){
+        display.textContent = ''
+        operation = e.target.textContent
+        
+    }
+
+    else if (Number(e.target.textContent) <= 9) {
+        store = Number(e.target.textContent)
+        display.textContent += store
+        storeThree = Number(display.textContent)
+        
+        }
+    
+    
+    else if (e.target.textContent == '='){
+      display.textContent = (operator(`${operation}`, storeTwo, storeThree))
     }
     
+    else if (e.target.textContent == 'AC'){
+        store = 0;
+        storeTwo = 0;
+        storeThree =0;
+        operation = '';
+        display.textContent = ""
+    }
+
     });
     
  });
 
-btnEqual.addEventListener('click', (e) => {
-    console.log('hey')
-})
 
-btnClear.addEventListener('click', (e) => {
-   const store = e.target.textContent
-   display.textContent = ""
-   
-})
+
+
+
 
 
 
