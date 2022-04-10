@@ -33,7 +33,7 @@ body {
 
 .display {
     display: flex;
-    width: 15vw;
+    width: 90%;
     height: 10vh;
     background-color: aqua;
     background-color: rgb(189, 255, 151);
@@ -66,9 +66,9 @@ button {
     height: 4em;
 }
 
-.buttonTwo button, .buttonThree button, 
+.buttonTwo button:not(button:last-child), .buttonThree button:not(button:last-child), 
 .bottom-left-one button, .bottom-left-two button {
-    background: linear-gradient(rgb(167, 160, 160), rgb(78, 78, 78));
+    background: linear-gradient(rgb(68, 66, 66), black);
     color: white
 }
 
@@ -83,6 +83,11 @@ button {
     background-color: orange;
 }
 
+.buttonOne{
+    display: flex;
+    justify-content: space-between;
+}
+
 .bottom-left-two {
     display: flex;
     gap: 3px;
@@ -91,4 +96,9 @@ button {
 .bottom-left-modal button:last-child{
 
     flex-grow: 2;
+}
+
+.buttonThree button:last-child, .buttonTwo button:last-child {
+    background-color: orange;
+    height: 4em
 }

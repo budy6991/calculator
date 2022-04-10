@@ -46,22 +46,39 @@ const display = document.querySelector('.display')
 const btnClear = document.querySelector('.clear')
 const btnEqual = document.querySelector('.equal')
 
+
 btns.forEach(btn => {
-
-
+    
     btn.addEventListener('click', (e)=> {
-      const store = e.target.textContent
-      display.textContent += store
-      const storeTwo = display.textContent
-      console.log(storeTwo)
-    });
+        
+        let store = 0;
+        let storeTwo = 0;
 
+    if (Number(e.target.textContent) <= 9) {
+    store = Number(e.target.textContent)
+      display.textContent += store
+    storeTwo = display.textContent
+    console.log(storeTwo)
+    }
+    
+    else if (e.target.textContent == '+'){
+        let storeTwo = Number(display.textContent)
+        console.log(operator('+', storeTwo, storeTwo))
+    }
+    
+    });
+    
  });
 
+btnEqual.addEventListener('click', (e) => {
+    console.log('hey')
+})
 
 btnClear.addEventListener('click', (e) => {
    const store = e.target.textContent
    display.textContent = ""
+   
 })
+
 
 
