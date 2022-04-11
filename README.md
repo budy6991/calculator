@@ -1,2 +1,3 @@
 # calculator
-Building a simple calculator.
+Building a simple calculator 
+
