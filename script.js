@@ -50,6 +50,8 @@ let store = 0;
 let storeTwo = 0;
 let storeThree =0;
 let operation = '';
+let pairOfNumbers = 0;
+let result = 0;
 
 btns.forEach(btn => {
     
@@ -69,6 +71,7 @@ btns.forEach(btn => {
         display.textContent = ''
         operation = e.target.textContent
         
+        
     }
 
     else if (Number(e.target.textContent) <= 9) {
@@ -83,9 +86,24 @@ btns.forEach(btn => {
     else if (e.target.textContent == '='){
       display.textContent = (operator(`${operation}`, storeTwo, storeThree))
         storeTwo = (operator(`${operation}`, storeTwo, storeThree))
+        pairOfNumbers = storeTwo
+        console.log(pairOfNumbers)
         
     }
-    
+
+    else if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '/' ){
+        display.textContent = pairOfNumbers
+        operation = e.target.textContent
+    }
+
+    else if (Number(e.target.textContent) <= 9) {
+        
+        store = pairOfNumbers
+        display.textContent += store
+        result = Number(display.textContent)
+        
+        }
+        
     else if (e.target.textContent == 'AC'){
         store = 0;
         storeTwo = 0;
@@ -94,10 +112,14 @@ btns.forEach(btn => {
         display.textContent = ""
     }
 
+    
+
     });
     
  });
 
+
+//The calculator should not evaluate more than a single pair of numbers at a time 
 
 
 
