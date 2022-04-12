@@ -19,7 +19,7 @@ function divide (x,y){
 //Creates the function based on the operator selected
 
 
-function operator(operator, num1, num2) {
+function operate(operator, num1, num2) {
 
     if (operator =="+"){
         return add(num1,num2)
@@ -39,6 +39,8 @@ function operator(operator, num1, num2) {
 
 }
 
+
+
 // Creating the event listeners 
 
 const btns = document.querySelectorAll('button');
@@ -50,15 +52,21 @@ const btnEqual = document.querySelector('.equal')
     let secondInput = 0;
     let operation = '';
 
+
+
 btns.forEach(btn => {
     
     btn.addEventListener('click', (e)=> {
         
+        //Gets the first input
+
     if (Number(e.target.textContent) <= 9 && operation == '') {
         firstInput = Number(e.target.textContent)
         display.textContent += firstInput
-        firstInput = Number(display.textContent)
+        firstInput = Number(display.textContent)    
     }
+
+        //Gets the operator
     
     else if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '/' ){
         display.textContent = ''
@@ -66,20 +74,27 @@ btns.forEach(btn => {
         
     }
 
+        //Gets the second input
+
     else if (Number(e.target.textContent) <= 9) {
         
         secondInput = Number(e.target.textContent)
         display.textContent += secondInput
         secondInput = Number(display.textContent)
-        
+            
         }
-    
+
+        //Gets the total value
     
     else if (e.target.textContent == '='){
-      display.textContent = (operator(`${operation}`, firstInput, secondInput))
-        secondInput = (operator(`${operation}`, firstInput, secondInput))
         
+        console.log(e.target.textContent)
+        display.textContent = (operate(operation, firstInput, secondInput))
+        firstInput = (operate(operation, firstInput, secondInput))
+        console.log(firstInput)
+
     }
+
     
     else if (e.target.textContent == 'AC'){
         firstInput = 0;
