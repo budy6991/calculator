@@ -15,10 +15,7 @@ function multiply (x,y){
 function divide (x,y){
     return x/y
 }
-
 //Creates the function based on the operator selected
-
-
 function operate(operator, num1, num2) {
 
     if (operator =="+"){
@@ -51,61 +48,56 @@ const btnEqual = document.querySelector('.equal')
     let firstInput = 0;
     let secondInput = 0;
     let operation = '';
-
+    let statusOperator = false
 
 
 btns.forEach(btn => {
     
     btn.addEventListener('click', (e)=> {
+
+        //Clear button
         
+    if (e.target.textContent == 'AC'){
+            firstInput = 0;
+            secondInput = 0;
+            operation = '';
+            display.textContent = ""
+        }
+
         //Gets the first input
 
-    if (Number(e.target.textContent) <= 9 && operation == '') {
+    else if (Number(e.target.textContent) <= 9 && operation == '') {
         firstInput = Number(e.target.textContent)
         display.textContent += firstInput
-        firstInput = Number(display.textContent)    
+        firstInput = Number(display.textContent) 
     }
 
         //Gets the operator
     
-    else if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '/' ){
+    else if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '/'){
         display.textContent = ''
         operation = e.target.textContent
-        
+        //OPERATOR
     }
 
         //Gets the second input
 
     else if (Number(e.target.textContent) <= 9) {
-        
         secondInput = Number(e.target.textContent)
         display.textContent += secondInput
-        secondInput = Number(display.textContent)
-            
+        firstInput = (operate(operation, firstInput, secondInput))
+        display.textContent = firstInput
         }
 
         //Gets the total value
     
     else if (e.target.textContent == '='){
-        
-        console.log(e.target.textContent)
-        display.textContent = (operate(operation, firstInput, secondInput))
-        firstInput = (operate(operation, firstInput, secondInput))
+        display.textContent = (firstInput)
         console.log(firstInput)
-
-    }
-
-    
-    else if (e.target.textContent == 'AC'){
-        firstInput = 0;
-        secondInput = 0;
-        operation = '';
-        display.textContent = ""
     }
 
     });
     
  });
-
 
 
