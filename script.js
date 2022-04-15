@@ -11,7 +11,9 @@
     function divide (x,y){
         return x/y
     }
+
 //Creates the function based on the operator selected
+
 function operate(operator, num1, num2) {
     
     if (operator =="+"){
@@ -38,12 +40,10 @@ const equalTo = document.querySelector('.equal')
 const clear = document.querySelector('.clear')
 
 // Initializing the variables to null or empty
-
     let previousOperand = null;
     let nextOperand = null;
     let operation = '';
     let result = null;
-
 
     // Clear button > event listener
 
@@ -79,15 +79,18 @@ const clear = document.querySelector('.clear')
                 display.textContent = ''
                 previousOperand = operate(operation, previousOperand, nextOperand)
                 operation = e.target.textContent
-                console.log(previousOperand)      
+                console.log(previousOperand)
+                
+                if (previousOperand === Infinity){
+                    display.textContent = 'ERROR'
+                }
                                             
             }
+             
         })
 
-            
-        
     })
-
+                
     //Numbers > event listeners.
     
     numbers.forEach(numbers => {
@@ -115,7 +118,6 @@ const clear = document.querySelector('.clear')
                 
             }
 
-
         })
             
     })
@@ -124,6 +126,11 @@ const clear = document.querySelector('.clear')
 
     equalTo.addEventListener('click', (e) => {
             result = operate(operation, previousOperand, nextOperand)
-            display.textContent = result
+
+            if (result === Infinity) {
+                display.textContent = 'ERROR'
+            }
+
+            else display.textContent = result
         })
 
