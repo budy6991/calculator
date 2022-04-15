@@ -29,7 +29,7 @@ function operate(operator, num1, num2) {
 
 }
 
-// Creating the event listeners 
+// Selecting the buttons the event listeners 
 
 const display = document.querySelector('.display')
 const operators = document.querySelectorAll('.btn-operator')
@@ -37,73 +37,92 @@ const numbers = document.querySelectorAll('.btn-number')
 const equalTo = document.querySelector('.equal')
 const clear = document.querySelector('.clear')
 
+// Initializing the variables to null or empty
 
-    let previousOperand = 0;
-    let nextOperand = 0;
+    let previousOperand = null;
+    let nextOperand = null;
     let operation = '';
-    let statusOperation = false
-    let result = 0;
+    let result = null;
+
+
+    // Clear button > event listener
 
     clear.addEventListener('click', (e) => {
-        previousOperand = 0;
-        nextOperand = 0;
+        previousOperand = null;
+        nextOperand = null;
         operation = '';
-        result = 0;
+        result = null;
         display.textContent = ''
-        statusOperation = false
     })
-    
-    
-    //We input the first number
+        
+    // Operator > event listeners.
+
+    operators.forEach(operator => {
+
+        //Inputs the first operation if the first number was inputed. (2)
+        
+        operator.addEventListener('click', (e) => {
+            
+            if (operation == '') {
+
+            display.textContent = ''
+            operation = e.target.textContent         
+            previousOperand = nextOperand
+            console.log(operation)
+
+        }
+
+        //If we have (previous & next operand & a operand), it inputs a new operator and gets the result of the previous calculation. (4)
+
+            else if (operation != '' &&  nextOperand != null ) {
+
+                display.textContent = ''
+                previousOperand = operate(operation, previousOperand, nextOperand)
+                operation = e.target.textContent
+                console.log(previousOperand)      
+                                            
+            }
+        })
+
+            
+        
+    })
+
+    //Numbers > event listeners.
     
     numbers.forEach(numbers => {
 
         numbers.addEventListener('click', (e) => {
+
+            //Inputs the first number (1)
+
+            if (previousOperand == null && operation == ''){
+            
             nextOperand = e.target.textContent
             display.textContent += nextOperand
             nextOperand = Number(display.textContent)
             console.log(nextOperand)
+                
+            }
 
-            //Once the operator is selected, we input the nextOperand, which will become the previous operator 
+            //Inputs the second number if an operation and a previous number exist.(3)
 
-            if (operation != ''){
+            else if (operation != '' && previousOperand != null){
+                
+                nextOperand = e.target.textContent
+                display.textContent += nextOperand
                 nextOperand = Number(display.textContent)
-                    display.textContent = nextOperand
-                    statusOperation = true
-                }
-
-        
-            })
-            
-})
-
-    operators.forEach(operator => {
-        
-        operator.addEventListener('click', (e) => {
                 
+            }
 
-            //We select the operator, and switch the nextOperand to the previous operator 
-
-            if ((e.target.textContent == '+' || e.target.textContent == '-' ||e.target.textContent == 'x' || e.target.textContent == '/') && statusOperation == false) {
-                operation = e.target.textContent
-                    display.textContent = '';
-                    console.log(operation)
-                    previousOperand = nextOperand
-                    console.log(previousOperand)
-                    
-                }
-            
-                else if (statusOperation == true && (e.target.textContent == '+' || e.target.textContent == '-' ||e.target.textContent == 'x' || e.target.textContent == '/')){
-                    nextOperand = operate(operation, previousOperand, nextOperand)
-                    console.log(nextOperand)
-                }
-                
-            })
 
         })
-        
-        
-        equalTo.addEventListener('click', (e) => {
+            
+    })
+    
+    // Equal To > event listener. 
+
+    equalTo.addEventListener('click', (e) => {
             result = operate(operation, previousOperand, nextOperand)
             display.textContent = result
         })
